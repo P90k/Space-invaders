@@ -30,7 +30,11 @@ class GlobalVars(GameObjects):
 
     def __init__(self, screen, space):
         super().__init__(screen, space)
-        self.objects = dict()
+        # Should I have one list with all objects or
+        # several lists to increase readability?
+        self.objects = {
+            'game_objects_list': [],
+        }
 
     def key_exists(self, key) -> True:
         """Predicate function to check if key exists in objects attr"""
@@ -43,6 +47,17 @@ class GlobalVars(GameObjects):
             return "Key stored"
         else:
             return "Key already stored"
+
+    def add_game_object(self, obj):
+        """Add element to game objects list"""
+        self.objects['game_objects_list'].append(obj)
+
+    def remove_game_object(self):
+        """Remove element from game obj sequence"""
+        # When we have real objects, find shape.parent
+        # and remove that specific object to avoid removing
+        # similar objects that should not be removed.
+        self.objects['game_objects_list'].remove(obj)
 
     def get_key(self, key):
         """Get value of key from objects"""
