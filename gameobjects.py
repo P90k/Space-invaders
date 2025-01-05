@@ -1,23 +1,32 @@
-
+import pygame
 
 class GameObjects:
     """Basic class to represent objects in game engine and on screen"""
 
-    def __init__(self, screen, space):
-        super().__init__()
+    def __init__(self, screen):
         self.screen = screen
-        self.space = space
 
 
-    def update(self):
+class SpaceShip(GameObjects):
+
+    def __init__(self, screen, sprite):
+        super().__init__(screen)
+        self.sprite = sprite
+        self.ship_rect = self.sprite.get_rect()
+        self.pos = (1080 * 0.45, 720 * 0.85)
+
+    def turn_left(self):
+        self.pos = (self.pos[0] - 20, self.pos[1])
+
+    def turn_right(self):
         pass
 
+    def shoot(self):
+        pass
 
-class Tank(GameObjects):
-
-    def __init(self):
-        super().__init__()
-
+    def draw(self):
+        """Generate ship on screen"""
+        self.screen.blit(self.sprite, self.pos)
 
 class Bullet(GameObjects):
 
@@ -28,8 +37,8 @@ class Bullet(GameObjects):
 class GlobalVars(GameObjects):
     """Class to store all variables within game"""
 
-    def __init__(self, screen, space):
-        super().__init__(screen, space)
+    def __init__(self, screen):
+        super().__init__(screen)
         # Should I have one list with all objects or
         # several lists to increase readability?
         self.objects = {
